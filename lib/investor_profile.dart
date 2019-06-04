@@ -4,7 +4,7 @@ final List<InvestorProfile> demoInvestorProfiles = [
         "assets/James_portrait.png",
       ],
       name: "James Riney",
-      bio: "経歴:Coral capital CEO",
+      bio: "経歴:Coral Capital CEO",
       want_person: '投資したい人材：熱意に満ちていて世界を変えようと本気で思っている方',
       available_investment: '投資可能額：6000万円'),
   new InvestorProfile(
