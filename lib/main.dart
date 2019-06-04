@@ -5,6 +5,7 @@ import './profiles.dart';
 import 'home.dart';
 import 'home_investor.dart';
 import 'introduction/intro_1.dart';
+import 'introduction/choose_role.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'EasyFund'),
+      home: ChooseRole(),
 
     );
   }
