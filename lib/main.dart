@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './matches.dart';
 import './profiles.dart';
+import 'introduction/walkthrough.dart';
 import  'introduction/choose_role.dart';
 
 void main() => runApp(MyApp());

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'choose_role.dart';
 
+int pageNum;
+
+
 class Walkthrough_Screen extends StatefulWidget {
   @override
   _Walkthrough_ScreenState createState() => _Walkthrough_ScreenState();
@@ -27,7 +30,9 @@ class _Walkthrough_ScreenState extends State<Walkthrough_Screen> {
                   title: "投資家の方へ",
                   textBody: "ISAsを通じて、日本の教育界に大きな変革を起こしましょう！",
                   imageAssets: 'assets/undraw_investing_7u74.png'),
+              ChooseRole()
             ],
+
           ),
         ],
       ),
@@ -40,6 +45,8 @@ class Walkthrougth extends StatelessWidget {
   final String title;
   final String textBody;
   final String imageAssets;
+  bool isLast;
+  int pageNum = 0;
 
   Walkthrougth(
       {Key key,
@@ -47,6 +54,44 @@ class Walkthrougth extends StatelessWidget {
       @required this.imageAssets,
       @required this.textBody})
       : super(key: key);
+
+
+  Widget _putButton(context){
+
+
+    pageNum += 1;
+    print(pageNum);
+    (pageNum == 2 )? isLast = true : isLast = false;
+
+    if (isLast == true){
+
+      return SizedBox(
+
+        width: 200,
+        height: 50,
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(30.0),
+              ),
+            ),
+            child: Text(
+              'Get Started!',
+              style: TextStyle(color: Colors.white, fontSize: 18.0),
+            ),
+            color: Color(0xFF15B4F1),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChooseRole(),
+                ),
+              );
+            }),
+      );
+    }
+    return SizedBox(width:10.0, height:10.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,29 +122,9 @@ class Walkthrougth extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: 200,
-            height: 50,
-            child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30.0),
-                  ),
-                ),
-                child: Text(
-                  'Get Started!',
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
-                ),
-                color: Color(0xFF15B4F1),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChooseRole(),
-                    ),
-                  );
-                }),
-          ),
+          _putButton(context)
+
+
         ],
       ),
     );
