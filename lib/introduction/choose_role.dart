@@ -44,7 +44,7 @@ class _ChooseRoleState extends State<ChooseRole> {
             width: 260.0,
             height: 50.0,
             child: RaisedButton(
-              color: Color(0xFF0039ba),
+              color: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(30.0),
