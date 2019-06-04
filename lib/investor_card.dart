@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttery_dart2/layout.dart';
-import 'package:tinder/profiles.dart';
+import 'package:tinder/investor_profile.dart';
 import './photos.dart';
-import './matches.dart';
+import './investor_matches.dart';
 
 class CardStack extends StatefulWidget {
-  final MatchEngine matchEngine;
+  final InvestorMatchEngine investorMatchEngine;
 
-  CardStack({this.matchEngine});
+  CardStack({this.investorMatchEngine});
 
   @override
   _CardStackState createState() => _CardStackState();
@@ -16,15 +16,15 @@ class CardStack extends StatefulWidget {
 
 class _CardStackState extends State<CardStack> {
   Key _frontCard;
-  Match _currentMatch;
+  InvestorMatch _currentMatch;
   double _nextCardScale = 0.0;
 
   @override
   void initState() {
     super.initState();
-    widget.matchEngine.addListener(_onMatchEngineChange);
+    widget.investorMatchEngine.addListener(_oninvestorMatchEngineChange);
 
-    _currentMatch = widget.matchEngine.currentMatch;
+    _currentMatch = widget.investorMatchEngine.currentMatch;
     _currentMatch.addListener(_onMatchChange);
 
     _frontCard = new Key(_currentMatch.profile.name);
@@ -34,15 +34,15 @@ class _CardStackState extends State<CardStack> {
   void didUpdateWidget(CardStack oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.matchEngine != oldWidget.matchEngine) {
-      oldWidget.matchEngine.removeListener(_onMatchEngineChange);
-      widget.matchEngine.addListener(_onMatchEngineChange);
+    if (widget.investorMatchEngine != oldWidget.investorMatchEngine) {
+      oldWidget.investorMatchEngine.removeListener(_oninvestorMatchEngineChange);
+      widget.investorMatchEngine.addListener(_oninvestorMatchEngineChange);
 
       if (_currentMatch != null) {
         _currentMatch.removeListener(_onMatchChange);
       }
 
-      _currentMatch = widget.matchEngine.currentMatch;
+      _currentMatch = widget.investorMatchEngine.currentMatch;
       if (_currentMatch != null) {
         _currentMatch.addListener(_onMatchChange);
       }
@@ -55,17 +55,17 @@ class _CardStackState extends State<CardStack> {
       _currentMatch.removeListener(_onMatchChange);
     }
 
-    widget.matchEngine.removeListener(_onMatchEngineChange);
+    widget.investorMatchEngine.removeListener(_oninvestorMatchEngineChange);
     super.dispose();
   }
 
-  _onMatchEngineChange() {
+  _oninvestorMatchEngineChange() {
     setState(() {
       if (_currentMatch != null) {
         _currentMatch.removeListener(_onMatchChange);
       }
 
-      _currentMatch = widget.matchEngine.currentMatch;
+      _currentMatch = widget.investorMatchEngine.currentMatch;
       if (_currentMatch != null) {
         _currentMatch.addListener(_onMatchChange);
       }
@@ -83,7 +83,7 @@ class _CardStackState extends State<CardStack> {
       transform: Matrix4.identity()..scale(_nextCardScale, _nextCardScale),
       alignment: Alignment.center,
       child: ProfileCard(
-        profile: widget.matchEngine.nextMatch.profile,
+        profile: widget.investorMatchEngine.nextMatch.profile,
       ),
     );
   }
@@ -91,12 +91,12 @@ class _CardStackState extends State<CardStack> {
   Widget _buildFrontCard() {
     return ProfileCard(
       key: _frontCard,
-      profile: widget.matchEngine.currentMatch.profile,
+      profile: widget.investorMatchEngine.currentMatch.profile,
     );
   }
 
   SlideDirection _desiredSlideOutDirection() {
-    switch (widget.matchEngine.currentMatch.decision) {
+    switch (widget.investorMatchEngine.currentMatch.decision) {
       case Decision.nope:
         return SlideDirection.left;
         break;
@@ -118,7 +118,7 @@ class _CardStackState extends State<CardStack> {
   }
 
   void _onSlideComplete(SlideDirection direction) {
-    Match currenMatch = widget.matchEngine.currentMatch;
+    InvestorMatch currenMatch = widget.investorMatchEngine.currentMatch;
 
     switch (direction) {
       case SlideDirection.left:
@@ -132,7 +132,7 @@ class _CardStackState extends State<CardStack> {
         break;
     }
 
-    widget.matchEngine.cycleMatch();
+    widget.investorMatchEngine.cycleMatch();
   }
 
   @override
@@ -209,13 +209,13 @@ class _DraggableCardState extends State<DraggableCard>
       duration: const Duration(milliseconds: 1000),
     )
       ..addListener(() => setState(() {
-            cardOffset = Offset.lerp(slideBackStart, const Offset(0.0, 0.0),
-                Curves.elasticOut.transform(slideBackAnimation.value));
+        cardOffset = Offset.lerp(slideBackStart, const Offset(0.0, 0.0),
+            Curves.elasticOut.transform(slideBackAnimation.value));
 
-            if (null != widget.onSlideUpdate) {
-              widget.onSlideUpdate(cardOffset.distance);
-            }
-          }))
+        if (null != widget.onSlideUpdate) {
+          widget.onSlideUpdate(cardOffset.distance);
+        }
+      }))
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
           setState(() {
@@ -231,12 +231,12 @@ class _DraggableCardState extends State<DraggableCard>
       duration: const Duration(milliseconds: 500),
     )
       ..addListener(() => setState(() {
-            cardOffset = slideOutTween.evaluate(slideOutAnimation);
+        cardOffset = slideOutTween.evaluate(slideOutAnimation);
 
-            if (null != widget.onSlideUpdate) {
-              widget.onSlideUpdate(cardOffset.distance);
-            }
-          }))
+        if (null != widget.onSlideUpdate) {
+          widget.onSlideUpdate(cardOffset.distance);
+        }
+      }))
       ..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.completed) {
           setState(() {
@@ -358,7 +358,7 @@ class _DraggableCardState extends State<DraggableCard>
         slideOutAnimation.forward(from: 0.0);
 
         slideOutDirection =
-            isInLeftRegion ? SlideDirection.left : SlideDirection.right;
+        isInLeftRegion ? SlideDirection.left : SlideDirection.right;
       } else if (isInTopRegion) {
         slideOutTween = new Tween(
             begin: cardOffset, end: dragVector * (2 * context.size.height));
@@ -375,7 +375,7 @@ class _DraggableCardState extends State<DraggableCard>
   double _rotation(Rect dragBounds) {
     if (dragStart != null) {
       final rotationCornerMultiplier =
-          dragStart.dy >= dragBounds.top + (dragBounds.height / 2) ? -1 : 1;
+      dragStart.dy >= dragBounds.top + (dragBounds.height / 2) ? -1 : 1;
       return (pi / 8) *
           (cardOffset.dx / dragBounds.width) *
           rotationCornerMultiplier;
@@ -402,8 +402,8 @@ class _DraggableCardState extends State<DraggableCard>
           position: anchor,
           child: new Transform(
             transform:
-                new Matrix4.translationValues(cardOffset.dx, cardOffset.dy, 0.0)
-                  ..rotateZ(_rotation(anchorBounds)),
+            new Matrix4.translationValues(cardOffset.dx, cardOffset.dy, 0.0)
+              ..rotateZ(_rotation(anchorBounds)),
             origin: _rotationOrigin(anchorBounds),
             child: new Container(
               key: profileCardKey,
@@ -425,7 +425,7 @@ class _DraggableCardState extends State<DraggableCard>
 }
 
 class ProfileCard extends StatefulWidget {
-  final Profile profile;
+  final InvestorProfile profile;
 
   ProfileCard({Key key, this.profile}) : super(key: key);
 
@@ -452,9 +452,9 @@ class _ProfileCardState extends State<ProfileCard> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Colors.transparent,
-              Colors.black.withOpacity(0.8),
-            ])),
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.8),
+                ])),
         padding: const EdgeInsets.all(24.0),
         child: new Row(
           mainAxisSize: MainAxisSize.max,
@@ -465,13 +465,16 @@ class _ProfileCardState extends State<ProfileCard> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(widget.profile.name,
-                    style:
-                    new TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+                      style:
+                      new TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+                  SizedBox(height: 10.0,),
                   Text(widget.profile.bio,
-                    style: new TextStyle(color: Colors.white, fontSize: 18.0)),
-                  Text(widget.profile.expectedInvestment,
                       style: new TextStyle(color: Colors.white, fontSize: 18.0)),
-                  Text(widget.profile.howToUse,
+                  SizedBox(height: 10.0,),
+                  Text(widget.profile.want_person,
+                      style: new TextStyle(color: Colors.white, fontSize: 18.0)),
+                  SizedBox(height: 10.0,),
+                  Text(widget.profile.available_investment,
                       style: new TextStyle(color: Colors.white, fontSize: 18.0)),
 
                 ],

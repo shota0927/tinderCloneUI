@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './cards.dart';
-import './matches.dart';
-import './profiles.dart';
+import './investor_card.dart';
+import './investor_matches.dart';
+import './investor_profile.dart';
 
 class MyHomeInvestorPage extends StatefulWidget {
   MyHomeInvestorPage({Key key, this.title}) : super(key: key);
@@ -13,10 +13,10 @@ class MyHomeInvestorPage extends StatefulWidget {
 }
 
 class _MyHomeInvestorPageState extends State<MyHomeInvestorPage> {
-  Match match = new Match();
-  final MatchEngine matchEngine = new MatchEngine(
-      matches: demoProfiles.map((Profile profile) {
-        return Match(profile: profile);
+  InvestorMatch match = new InvestorMatch();
+  final InvestorMatchEngine investorMatchEngine = new InvestorMatchEngine(
+      matches: demoInvestorProfiles.map((InvestorProfile profile) {
+        return InvestorMatch(profile: profile);
       }).toList());
 
   Widget _buildAppBar() {
@@ -71,21 +71,21 @@ class _MyHomeInvestorPageState extends State<MyHomeInvestorPage> {
                 icon: Icons.clear,
                 iconColor: Colors.red,
                 onPressed: () {
-                  matchEngine.currentMatch.nope();
+                  investorMatchEngine.currentMatch.nope();
                 },
               ),
               new RoundIconButton.small(
                 icon: Icons.star,
                 iconColor: Colors.blue,
                 onPressed: () {
-                  matchEngine.currentMatch.superLike();
+                  investorMatchEngine.currentMatch.superLike();
                 },
               ),
               new RoundIconButton.large(
                 icon: Icons.favorite,
                 iconColor: Colors.green,
                 onPressed: () {
-                  matchEngine.currentMatch.like();
+                  investorMatchEngine.currentMatch.like();
                 },
               ),
               new RoundIconButton.small(
@@ -103,7 +103,7 @@ class _MyHomeInvestorPageState extends State<MyHomeInvestorPage> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: new CardStack(
-        matchEngine: matchEngine,
+        investorMatchEngine: investorMatchEngine,
       ),
       bottomNavigationBar: _buildBottomBar(),
     );

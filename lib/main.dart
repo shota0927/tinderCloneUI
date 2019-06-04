@@ -4,6 +4,7 @@ import './matches.dart';
 import './profiles.dart';
 import 'home.dart';
 import 'home_investor.dart';
+import 'introduction/intro_1.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: MyHomeInvestorPage(title: 'EasyFund'),
+      home: MyHomePage(title: 'EasyFund'),
+
     );
   }
-
 }
