@@ -21,16 +21,18 @@ class _Walkthrough_ScreenState extends State<Walkthrough_Screen> {
                   title: "学費を出世払いに！",
                   textBody:
                       "ISAs(Income Share Agreements)は学費の出世払いを可能にする全く新しい奨学金です。",
-                  imageAssets: 'assets/undraw_graduation_9x4i.png'),
+                  imageAssets: 'assets/undraw_graduation_9x4i.png',
+                  opacity: 0.0),
               Walkthrougth(
                   title: "大学生・院生へ",
                   textBody: "自分の将来性をアピールすることによって、未来に投資してもらおう！",
-                  imageAssets: 'assets/undraw_exams_g4ow.png'),
+                  imageAssets: 'assets/undraw_exams_g4ow.png',
+                  opacity: 0.0),
               Walkthrougth(
                   title: "投資家の方へ",
                   textBody: "ISAsを通じて、日本の教育界に大きな変革を起こしましょう！",
-                  imageAssets: 'assets/undraw_investing_7u74.png'),
-              ChooseRole()
+                  imageAssets: 'assets/undraw_investing_7u74.png',
+                  opacity: 1.0),
             ],
 
           ),
@@ -45,25 +47,18 @@ class Walkthrougth extends StatelessWidget {
   final String title;
   final String textBody;
   final String imageAssets;
-  bool isLast;
-  int pageNum = 0;
+  final double opacity;
 
   Walkthrougth(
       {Key key,
       @required this.title,
       @required this.imageAssets,
-      @required this.textBody})
+      @required this.textBody,
+      @required this.opacity})
       : super(key: key);
 
 
   Widget _putButton(context){
-
-
-    pageNum += 1;
-    print(pageNum);
-    (pageNum == 2 )? isLast = true : isLast = false;
-
-    if (isLast == true){
 
       return SizedBox(
 
@@ -89,8 +84,6 @@ class Walkthrougth extends StatelessWidget {
               );
             }),
       );
-    }
-    return SizedBox(width:10.0, height:10.0);
   }
 
   @override
@@ -122,9 +115,33 @@ class Walkthrougth extends StatelessWidget {
               ),
             ),
           ),
-          _putButton(context)
 
-
+          Opacity(
+            opacity: opacity,
+            child: SizedBox(
+              width: 200,
+              height: 50,
+              child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30.0),
+                    ),
+                  ),
+                  child: Text(
+                    'Get Started!',
+                    style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  ),
+                  color: Color(0xFF15B4F1),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChooseRole(),
+                      ),
+                    );
+                  }),
+            ),
+          ),
         ],
       ),
     );
