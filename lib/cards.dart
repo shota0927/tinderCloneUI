@@ -471,6 +471,8 @@ class _ProfileCardState extends State<ProfileCard> {
                     style: new TextStyle(color: Colors.white, fontSize: 18.0)),
                   Text('アピールポイント:ビジコン優勝',
                       style: new TextStyle(color: Colors.white, fontSize: 18.0)),
+                  Text('投資希望額：６０万円',
+                      style: new TextStyle(color: Colors.white, fontSize: 18.0)),
 
                 ],
               ),
