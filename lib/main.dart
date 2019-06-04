@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: ChooseRole(),
+      home: Walkthrough_Screen(),
     );
   }
 }
