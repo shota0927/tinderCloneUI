@@ -26,6 +26,7 @@ dependencies:
 
   # fluttery: ^0.0.8
   fluttery_dart2: ^0.0.9
+  dots_indicator: ^0.0.5
 
 dev_dependencies:
   flutter_test:
