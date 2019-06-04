@@ -5,7 +5,7 @@ final List<InvestorProfile> demoInvestorProfiles = [
       ],
       name: "James Riney",
       bio: "経歴:Coral capital CEO",
-      want_person: '投資したい人材：熱意に満ちていて世界を変えようとほんきで思っている方',
+      want_person: '投資したい人材：熱意に満ちていて世界を変えようと本気で思っている方',
       available_investment: '投資可能額：6000万円'),
   new InvestorProfile(
     photos: [
