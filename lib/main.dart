@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import './cards.dart';
 import './matches.dart';
 import './profiles.dart';
-import 'home.dart';
-import 'introduction/walkthrough.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+import  'introduction/choose_role.dart';
 
 void main() => runApp(MyApp());
 
