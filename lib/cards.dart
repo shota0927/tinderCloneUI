@@ -464,11 +464,14 @@ class _ProfileCardState extends State<ProfileCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new Text(widget.profile.name,
+                  Text(widget.profile.name,
                       style:
                           new TextStyle(color: Colors.white, fontSize: 24.0)),
-                  new Text(widget.profile.bio,
-                      style: new TextStyle(color: Colors.white, fontSize: 18.0))
+                  Text('経歴:ICU卒業,　〇〇就職',
+                    style: new TextStyle(color: Colors.white, fontSize: 18.0)),
+                  Text('アピールポイント:ビジコン優勝',
+                      style: new TextStyle(color: Colors.white, fontSize: 18.0)),
+
                 ],
               ),
             ),
