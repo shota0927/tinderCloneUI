@@ -1,22 +1,19 @@
 final List<Profile> demoProfiles = [
   new Profile(
     photos: [
-      "assets/photo_1.jpg",
-      "assets/photo_2.jpg",
-      "assets/photo_3.jpg",
-      "assets/photo_4.jpg",
+      "assets/Wasshy.jpg",
+      "assets/Wasshy.jpg",
+
     ],
-    name: "Gross person",
+    name: "Washida Yuu",
     bio: "You better swpe left",
   ),
   new Profile(
     photos: [
       "assets/photo_2.jpg",
-      "assets/photo_3.jpg",
-      "assets/photo_4.jpg",
-      "assets/photo_1.jpg",
+
     ],
-    name: "Someone Special",
+    name: "",
     bio: "This is the person you want",
   ),
 ];
