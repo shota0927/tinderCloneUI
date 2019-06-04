@@ -6,9 +6,10 @@ import './profiles.dart';
 void main() => runApp(MyApp());
 
 final MatchEngine matchEngine = new MatchEngine(
-    matches: demoProfiles.map((Profile profile) {
-  return Match(profile: profile);
-}).toList());
+  matches: demoProfiles.map((Profile profile) {
+    return Match(profile: profile);
+  }).toList(),
+);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -51,10 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // TODO
         },
       ),
-      title: new FlutterLogo(
-        size: 30.0,
-        colors: Colors.red,
-      ),
+      title: Text('ISA Matching'),
       actions: <Widget>[
         new IconButton(
           icon: new Icon(
