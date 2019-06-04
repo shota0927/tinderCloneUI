@@ -35,10 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // TODO
         },
       ),
-      title: new FlutterLogo(
-        size: 30.0,
-        colors: Colors.red,
-      ),
+      title: Text('ISA Matching'),
       actions: <Widget>[
         new IconButton(
           icon: new Icon(
